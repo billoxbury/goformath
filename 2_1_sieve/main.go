@@ -42,7 +42,7 @@ func main() {
 	// read off remaining falses from table
 	for i := 2; i < N; i++ {
 		if !table[i] {
-			fmt.Printf("%4v\n", i)
+			fmt.Printf("%4d\n", i)
 		}
 	}
 }

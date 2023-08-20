@@ -28,7 +28,7 @@ func main() {
 	// simple usage check
 	n := len(os.Args)
 	if n < 2 {
-		fmt.Printf("Usage: %v [-v] n1 n2\n", os.Args[0])
+		fmt.Printf("Usage: %s [-v] n1 n2\n", os.Args[0])
 		os.Exit(1)
 	}
 
