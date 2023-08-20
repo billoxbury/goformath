@@ -10,8 +10,9 @@ https://amehta.github.io/posts/2019/03/wc-implementation-in-go-lang/
 Run with:
 
 > go build .
+> ./wordcount go.mod
 > ./wordcount main.go
-
+> wc main.go
 
 */
 
@@ -61,12 +62,13 @@ func main() {
 		line := scanner.Text()
 		characters += len(line)
 
-		splitLines := strings.Split(line, " ")
+		//splitLines := strings.Split(line, " ") // doesn't ignore empty lines
+		splitLines := strings.Fields(line)
 		words += len(splitLines)
 	}
 
 	// report
-	fmt.Printf("%8d%8d%8d\t%s\n", lines, words, characters, fileName)
+	fmt.Printf("%8d%8d%8d %s\n", lines, words, characters, fileName)
 
 	// close file
 	file.Close()
