@@ -7,6 +7,8 @@ https://amehta.github.io/posts/2019/03/wc-implementation-in-go-lang/
 - os.Open() and file.Close()
 - bufio scanner
 
+NOTE char count still needs correcting!
+
 Run with:
 
 > go build .
