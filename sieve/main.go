@@ -28,20 +28,20 @@ func main() {
 	N, _ := strconv.Atoi(os.Args[1])
 
 	// initialise a sieve table - false by default, true if found composite
-	var table [MAXN]bool
+	var composite [MAXN]bool
 
 	// sieve
 	for i := 2; i < N; i++ {
-		if !table[i] {
+		if !composite[i] {
 			for j := i; i*j < N; j++ {
-				table[i*j] = true
+				composite[i*j] = true
 			}
 		}
 	}
 
 	// read off remaining falses from table
 	for i := 2; i < N; i++ {
-		if !table[i] {
+		if !composite[i] {
 			fmt.Printf("%4d\n", i)
 		}
 	}
