@@ -3,9 +3,9 @@
 See
 https://amehta.github.io/posts/2019/03/wc-implementation-in-go-lang/
 
-- error handling
-- os.Open() and file.Close()
+- open file or stdio
 - bufio scanner
+- strings package
 
 NOTE char count still needs correcting!
 
@@ -27,29 +27,20 @@ import (
 	"strings"
 )
 
-// error handling
-func check(e error) {
-	if e != nil {
-		panic(e)
-	}
-}
-
-// MAIN
 func main() {
 
 	// read file name
 	var fileName string
+	var file *os.File
 
+	// open file or stdin
 	if len(os.Args) > 1 {
 		fileName = os.Args[1]
+		file, _ = os.Open(fileName)
 	} else {
-		fmt.Printf("Usage: %s filename\n", os.Args[0])
-		os.Exit(1)
+		fileName = ""
+		file = os.Stdin
 	}
-
-	// open file
-	file, err := os.Open(fileName)
-	check(err)
 
 	// create scanner (bufio)
 	scanner := bufio.NewScanner(file)
@@ -64,6 +55,7 @@ func main() {
 		line := scanner.Text()
 		characters += len(line)
 
+		// choose a splitting function ...
 		//splitLines := strings.Split(line, " ") // doesn't ignore empty lines
 		splitLines := strings.Fields(line)
 		words += len(splitLines)
