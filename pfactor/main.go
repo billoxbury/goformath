@@ -25,7 +25,6 @@ func main() {
 	// interaction loop
 	fmt.Println("Enter number to factor, or Ctrl-C to quit:")
 	for {
-
 		// next input
 		fmt.Printf("pfactor> ")
 		var n int
