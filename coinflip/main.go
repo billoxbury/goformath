@@ -1,5 +1,9 @@
 /*
 
+- cmd line arguments with flag package
+- use of math/rand package
+
+
 math.rand package. Note:
 
 - rand.Seed() is deprecated (see documentation)
@@ -15,7 +19,8 @@ Not used here:
 Run with:
 
 > go build .
-> ./coinflip 20 1000 0.2
+> ./coinflip --help
+> ./coinflip -n 20 -p 0.2
 
 
 */
@@ -23,24 +28,19 @@ Run with:
 package main
 
 import (
+	"flag"
 	"fmt"
-	"os"
-	"strconv"
 )
 
 func main() {
 
-	// usage check
-	n := len(os.Args)
-	if n < 4 {
-		fmt.Printf("Usage: %s nr_coins nr_experiments coin_prob\n", os.Args[0])
-		os.Exit(1)
-	}
-
-	// cmd line args
-	N, _ := strconv.Atoi(os.Args[1])
-	M, _ := strconv.Atoi(os.Args[2])
-	p, _ := strconv.ParseFloat(os.Args[3], 64)
+	// cmd line arguments
+	var N, M int
+	var p float64
+	flag.IntVar(&N, "n", 10, "nr coin tosses/binomial draws")
+	flag.IntVar(&M, "m", 1000, "nr experiments")
+	flag.Float64Var(&p, "p", 0.5, "Bernoulli probability")
+	flag.Parse()
 
 	// initialise score table
 	var table []int
