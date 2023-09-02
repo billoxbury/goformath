@@ -3,8 +3,7 @@
 - cmd line arguments with flag package
 - use of math/rand package
 
-
-math.rand package. Note:
+Note:
 
 - rand.Seed() is deprecated (see documentation)
 
