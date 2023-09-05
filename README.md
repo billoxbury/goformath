@@ -1,5 +1,7 @@
 # goformath
 
+Tutorial code examples to teach myself Go.
+
 IN PROGRESS!!!
 
 | Go concept | Example code |
