@@ -2,7 +2,6 @@
 
 IN PROGRESS!!!
 
-|------------|--------------|
 | Go concept | Example code |
 |------------|--------------|
 | get data from stdin | fibonacci |
@@ -38,6 +37,5 @@ IN PROGRESS!!!
 | append slices with ... | gaussian |
 | read data from file | gaussian |
 | profiling using pprof | gaussian |
-|------------|--------------|
 
 
