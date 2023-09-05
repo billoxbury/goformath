@@ -22,7 +22,7 @@ go build .
 ./gaussian -h
 ./gaussian -w 2 > output.txt
 
-For profile:
+To convert profiles to PDF (and hence readable):
 
 go tool pprof -pdf ./gaussian ./prof/randS.prof > ./prof/randS.pdf
 go tool pprof -pdf ./gaussian ./prof/randP.prof > ./prof/randP.pdf
@@ -62,12 +62,12 @@ func main() {
 	// 1.
 	fmt.Println("Serial sample (rand):")
 
-	f1, _ := os.Create("randS.prof")
-	pprof.StartCPUProfile(f1)
-	start1 := time.Now()
-	x1 := rnorm(n, rand.NormFloat64)
-	tStd := time.Since(start1)
-	pprof.StopCPUProfile()
+	f1, _ := os.Create("randS.prof") // file to receive profile
+	pprof.StartCPUProfile(f1)        // start profiling
+	start1 := time.Now()             // start timing
+	x1 := rnorm(n, rand.NormFloat64) // do work
+	tStd := time.Since(start1)       // stop timing
+	pprof.StopCPUProfile()           // stop profiling
 
 	fmt.Printf("Time:\t\t%v\n", tStd)
 	summary(x1)
