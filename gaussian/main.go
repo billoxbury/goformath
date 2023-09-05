@@ -14,12 +14,13 @@ is set to the number of cores of the machine. For Box-Muller the advantage seems
 - use of a buffered channel
 - append slices with ...
 - read data from file
+- profiling using pprof
 
 Run with:
 
-> go build .
-> ./gaussian -h
-> ./gaussian -w 2 > output.txt
+go build .
+./gaussian -h
+./gaussian -w 2 > output.txt
 
 For profile:
 
