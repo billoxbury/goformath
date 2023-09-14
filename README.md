@@ -12,6 +12,7 @@ IN PROGRESS!!!
 | open file or stdio | wordcount |
 | bufio scanner | wordcount |
 | read data from file | gaussian |
+| io.Writer | trees |
 | _Arrays/slices_ ||
 | make a slice  with length read from stdin | fibonacci |
 | initialising a constant-length array | sieve |
@@ -23,13 +24,17 @@ IN PROGRESS!!!
 | multi-condition for-loop "for a,b := X,Y; ... ; a,b = P,Q { }" | pfactor |
 | infinite loop for {} | pfactor |
 | recursion | gcd |
+| switch | trees |
+| range | trees |
 | _Variables_ ||
 | constants (like #define in C) | sieve |
 | cast int as float64 | pfactor |
+| runes vs strings | trees |
+| passing function type as argument to another function | gaussian |
+| structs and methods | trees |
+| _Command line_ ||
 | command line options and flag package | gcd |
 | command line args | sieve |
-| passing function type as argument to another function | gaussian |
-| _Command line_ ||
 | cmd line arguments with flag package | coinflip |
 | --help | gcd |
 | usage check and os.Exit() | gcd |
