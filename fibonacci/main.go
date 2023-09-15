@@ -1,19 +1,3 @@
-/*
-
-- get data from stdin
-- make a slice (length read from stdin)
-- function call (written in a separate file)
-- for loop
-- string formatting a la C printf()
-
-Run with:
-
-> go mod init example.com/fibinacci
-> go build .
-> ./fibonacci
-
-*/
-
 package main
 
 import (
@@ -24,19 +8,21 @@ func main() {
 
 	// get index from user
 	fmt.Printf("Up to: ")
-	var idx int
-	fmt.Scanln(&idx)
-	idx++
+	var n, idx int
+	fmt.Scanln(&n)
+	idx = n + 1
 
 	// declare and make a slice
 	var arr []int
 	arr = make([]int, idx)
 
-	// compute
+	// THE RIGHT WAY
 	fib(arr)
-
-	// report
 	for i := 0; i < idx; i++ {
 		fmt.Printf("%3d %12d\n", i, arr[i])
 	}
+
+	// THE WRONG WAY
+	fmt.Println("Recursive implementation:")
+	fmt.Printf("%3d %12d\n", n, fibNaive(n))
 }
