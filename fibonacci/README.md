@@ -16,7 +16,6 @@ It also demonstrates pitfalls in algorithm design. The example compares two impl
 Run with:
 
 ```
-go mod init example.com/fibonacci
 go build .
 ./fibonacci
 ```
