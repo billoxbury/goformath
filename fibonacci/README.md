@@ -15,12 +15,8 @@ It also demonstrates pitfalls in algorithm design. The example compares two impl
 
 Run with:
 
-{% highlight bash %}
-
-go mod init example.com/fibinacci
-go build .
-./fibonacci
-
-{% endhighlight %}
+ go mod init example.com/fibonacci
+ go build .
+ ./fibonacci
 
 Try values in the range 40-50.
