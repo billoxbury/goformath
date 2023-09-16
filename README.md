@@ -11,7 +11,8 @@ IN PROGRESS!!!
 | get data from stdin | fibonacci |
 | open file or stdio | wordcount |
 | bufio scanner | wordcount |
-| read data from file | gaussian |
+| read data from file using _fmt.Fscanln_ | gaussian |
+| read data from file using _bufio_ scanner | tsp |
 | io.Writer | trees |
 | _Arrays/slices_ ||
 | make a slice  with length read from stdin | fibonacci |
@@ -41,6 +42,7 @@ IN PROGRESS!!!
 | _Formatting_ ||
 | string formatting a la C printf() | fibonacci |
 | strings package | wordcount |
+| strconv package | gcd |
 | convert string to int, float64 etc | sieve |
 | %v string format for general 'value' | bingcd |
 | _General_ ||

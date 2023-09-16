@@ -1,32 +1,29 @@
 package main
 
 import (
-	"bufio"
+	"fmt"
 	"os"
 	"sort"
-	"strconv"
 )
 
 const quantileFile = "normalQ.txt"
 
-// read from file the theoretical normal percentiles:
+// read from file the theoretical normal percentiles
 func normalPercentiles() []float64 {
 
-	// goodness-of-fit tests
-	var qf *os.File
-	qf, _ = os.Open(quantileFile)
 	var normalQ []float64
+	var x float64
+	var qf *os.File
 
-	// create scanner (bufio)
-	scanner := bufio.NewScanner(qf)
-	for scanner.Scan() {
-
-		line := scanner.Text()
-		x, _ := strconv.ParseFloat(line, 64)
+	qf, _ = os.Open(quantileFile)
+	for {
+		n, _ := fmt.Fscanln(qf, &x)
+		if n == 0 {
+			break
+		}
 		normalQ = append(normalQ, x)
 	}
 	qf.Close()
-
 	return normalQ
 }
 

@@ -1,6 +1,7 @@
 /*
 
 - command line options and flag package
+- strconv package
 - recursion
 - --help
 - usage check and os.Exit()
@@ -8,9 +9,9 @@
 Run with:
 
 > go build .
-> ./gcd 720 1040
-> ./gcd -v 720 1040
 > ./gcd -h
+> ./gcd 720 1040
+> ./gcd -x 720 1040
 
 */
 
@@ -33,8 +34,8 @@ func main() {
 	}
 
 	// cmd line flags
-	var verbose bool
-	flag.BoolVar(&verbose, "v", false, "verbose")
+	var explain bool
+	flag.BoolVar(&explain, "x", false, "explain")
 	flag.Parse()
 
 	// cmd line args (must come after any flags)
@@ -45,11 +46,11 @@ func main() {
 	d := gcd(a, b)
 
 	// report
-	if verbose {
-		fmt.Printf("gcd(%v, %v) = %v\n", a, b, d)
+	if explain {
+		fmt.Printf("gcd(%d, %d) = %d\n", a, b, d)
 		if d > 1 {
-			fmt.Printf("%v = %v x %v\n", a, d, a/d)
-			fmt.Printf("%v = %v x %v\n", b, d, b/d)
+			fmt.Printf("%d = %d x %d\n", a, d, a/d)
+			fmt.Printf("%d = %d x %d\n", b, d, b/d)
 		}
 	} else {
 		fmt.Println(d)

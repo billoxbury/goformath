@@ -20,7 +20,7 @@ Run with:
 
 go build .
 ./gaussian -h
-./gaussian -w 2 > output.txt
+./gaussian -w 4 > output.txt
 
 To convert profiles to PDF (and hence readable):
 
