@@ -3,21 +3,22 @@ package main
 import (
 	"fmt"
 	"math/rand"
-	"time"
 )
 
-const dataFile = "polygon.txt"
+const dataFile = "gb_cities.csv"
 
 func main() {
 
 	// variables
-	var points [][2]float64
 	var perm []int
 
-	// read points
-	//points = readFile(dataFile)
-	points = makePolygon(10)
-	npoints := len(points)
+	// read data
+	//labels, points := readCsv(dataFile)
+	//npoints := len(points)
+
+	// ... or make data
+	npoints := 20
+	labels, points := makePolygon(npoints)
 
 	// initialise distance matrix
 	dist := make([][]float64, npoints)
@@ -30,33 +31,22 @@ func main() {
 			dist[i][j] = distance(points[i], points[j])
 		}
 	}
-	// print distance matrix
-	//for _, d := range dist {
-	//	fmt.Println(d)
-	//}
-
 	// random permutation
 	perm = rand.Perm(npoints)
 	// perm = []int{0, 3, 6, 2, 5, 1, 4, 7}
 
-	niters := int(1e06)
-	start := time.Now()
-	for iter := 0; iter < niters; iter++ {
+	niters := int(1e07)
 
-		//old_d := travelDist(perm, dist)
-		//fmt.Println(perm, old_d)
-		i := rand.Intn(npoints)
-		j := rand.Intn(npoints)
-		//delta_d := deltaDist(i, j, perm, dist)
-		//deltaDist(i, j, perm, dist)
-		swap(i, j, perm)
-		//new_d := travelDist(perm, dist)
-		travelDist(perm, dist)
-		// print errors
-		//if math.Abs(old_d+delta_d-new_d) > 1e-10 {
-		//	fmt.Println(perm, old_d, i, j, delta_d, new_d)
-		//}
+	//checkDeltaComp(perm, dist, niters, float64(1e-10))
+	//timeTravelComp(perm, dist, niters)
+	//timeDeltaComp(perm, dist, niters)
+
+	perm, _ = naiveSearch(perm, dist, niters)
+
+	// show route
+	for _, v := range perm {
+		fmt.Printf("%v --> ", labels[v])
 	}
-	runtime := time.Since(start)
-	fmt.Println(runtime)
+	fmt.Printf("%v\n", labels[perm[0]])
+
 }
