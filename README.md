@@ -14,6 +14,13 @@ IN PROGRESS!!!
 | read data from file using _fmt.Fscanln_ | gaussian |
 | read data from file using _bufio_ scanner | tsp |
 | io.Writer | trees |
+| _Variables_ ||
+| constants (like #define in C) | sieve |
+| cast int as float64 | pfactor |
+| runes vs strings | trees |
+| passing function type as argument to another function | gaussian |
+| structs and methods | trees |
+| multiple-valued functions | tsp |
 | _Arrays/slices_ ||
 | make a slice  with length read from stdin | fibonacci |
 | initialising a constant-length array | sieve |
@@ -27,12 +34,6 @@ IN PROGRESS!!!
 | recursion | gcd |
 | switch | trees |
 | range | trees |
-| _Variables_ ||
-| constants (like #define in C) | sieve |
-| cast int as float64 | pfactor |
-| runes vs strings | trees |
-| passing function type as argument to another function | gaussian |
-| structs and methods | trees |
 | _Command line_ ||
 | command line options and flag package | gcd |
 | command line args | sieve |
