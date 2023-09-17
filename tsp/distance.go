@@ -1,10 +1,15 @@
 package main
 
-func distance(p1 [2]float64, p2 [2]float64) float64 {
+import (
+	"math"
+)
 
-	return (p1[0]-p2[0])*(p1[0]-p2[0]) + (p1[1]-p2[1])*(p1[1]-p2[1])
+// compute L_2 distance
+func distance(p1 [2]float64, p2 [2]float64) float64 {
+	return math.Sqrt((p1[0]-p2[0])*(p1[0]-p2[0]) + (p1[1]-p2[1])*(p1[1]-p2[1]))
 }
 
+// total distance around a given route
 func travelDist(perm []int, dist [][]float64) float64 {
 
 	td := 0.0

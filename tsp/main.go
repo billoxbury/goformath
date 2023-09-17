@@ -1,7 +1,6 @@
 package main
 
 import (
-	"fmt"
 	"math/rand"
 )
 
@@ -13,12 +12,12 @@ func main() {
 	var perm []int
 
 	// read data
-	//labels, points := readCsv(dataFile)
-	//npoints := len(points)
+	labels, points := readCsv(dataFile)
+	npoints := len(points)
 
 	// ... or make data
-	npoints := 20
-	labels, points := makePolygon(npoints)
+	//npoints := 30
+	//labels, points := makePolygon(npoints)
 
 	// initialise distance matrix
 	dist := make([][]float64, npoints)
@@ -31,11 +30,11 @@ func main() {
 			dist[i][j] = distance(points[i], points[j])
 		}
 	}
-	// random permutation
+	// initialise random permutation
 	perm = rand.Perm(npoints)
 	// perm = []int{0, 3, 6, 2, 5, 1, 4, 7}
 
-	niters := int(1e07)
+	niters := int(1e05)
 
 	//checkDeltaComp(perm, dist, niters, float64(1e-10))
 	//timeTravelComp(perm, dist, niters)
@@ -43,10 +42,6 @@ func main() {
 
 	perm, _ = naiveSearch(perm, dist, niters)
 
-	// show route
-	for _, v := range perm {
-		fmt.Printf("%v --> ", labels[v])
-	}
-	fmt.Printf("%v\n", labels[perm[0]])
-
+	printRoute(perm, labels)
+	writePerm(perm, "route.txt")
 }
