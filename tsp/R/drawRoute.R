@@ -1,7 +1,7 @@
-# Call with
-# Rscript drawRoute.R cityfile routefile outfile
+# Call from parent directory with
+# Rscript ./R/drawRoute.R cityfile routefile outfile
 # e.g.
-# Rscript drawRoute.R gb_cities.csv route.txt img/map.pdf
+# Rscript ./R/drawRoute.R ./data/gb_cities.csv ./data/route.txt ./img/map.pdf
 
 library(readr)
 library(dplyr)

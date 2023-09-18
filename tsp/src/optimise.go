@@ -7,6 +7,7 @@ import (
 	"time"
 )
 
+// naive search: pick random swaps and only move downhill
 func naiveSearch(perm []int, dist [][]float64, niters int) ([]int, float64) {
 
 	npoints := len(dist)
@@ -29,7 +30,8 @@ func naiveSearch(perm []int, dist [][]float64, niters int) ([]int, float64) {
 	return perm, distance
 }
 
-func metropolisSearch(perm []int, dist [][]float64, niters int) ([]int, float64) {
+// Metropolis algorithm (with a naive cooling schedule)
+func metropolisSearch(perm []int, dist [][]float64, niters int, verbose bool) ([]int, float64) {
 
 	npoints := len(dist)
 
@@ -45,7 +47,9 @@ func metropolisSearch(perm []int, dist [][]float64, niters int) ([]int, float64)
 	this_d := travelDist(perm, dist)
 	best_d := travelDist(perm, dist)
 	lastBest := 2 * best_d
-	best_p := perm
+	// to track the best permutation, make a new slice and copy perm into it:
+	best_p := make([]int, npoints)
+	copy(best_p, perm)
 
 	start := time.Now()
 	for iter := 0; iter < niters; iter++ {
@@ -54,22 +58,25 @@ func metropolisSearch(perm []int, dist [][]float64, niters int) ([]int, float64)
 		j := rand.Intn(npoints)
 		delta_d := deltaDist(i, j, perm, dist)
 		if delta_d < 0 || rand.Float64() < math.Exp(-delta_d/temperature) {
+			// accept move
 			swap(i, j, perm)
-			this_d += delta_d
 			acceptance += 1
+			this_d += delta_d
 			if this_d < best_d {
 				best_d = this_d
-				best_p = perm
+				copy(best_p, perm)
 			}
 		}
 
 		// report progress
 		if iter%period == 0 {
-			fmt.Printf("%6d: temperature %v, acceptance %v best dist %v\n",
-				iter,
-				temperature,
-				float64(acceptance)/float64(period),
-				best_d)
+			if verbose {
+				fmt.Printf("%6d: temperature %v, acceptance %v best dist %v\n",
+					iter,
+					temperature,
+					float64(acceptance)/float64(period),
+					best_d)
+			}
 			// check countdown
 			if best_d == lastBest {
 				ct++
@@ -87,7 +94,7 @@ func metropolisSearch(perm []int, dist [][]float64, niters int) ([]int, float64)
 	}
 	runtime := time.Since(start)
 	distance := travelDist(best_p, dist)
-	fmt.Printf("Found distance %v in %d steps, time %v\n", distance, acceptance, runtime)
+	fmt.Printf("Found distance %v in time %v\n", distance, runtime)
 
 	return best_p, distance
 }
