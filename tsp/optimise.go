@@ -37,11 +37,14 @@ func metropolisSearch(perm []int, dist [][]float64, niters int) ([]int, float64)
 	temperature := 10.0
 	cooling := 0.999
 	period := 10000
+	iterLimit := 400
+	ct := iterLimit
 
 	// track progress
 	acceptance := 0
 	this_d := travelDist(perm, dist)
 	best_d := travelDist(perm, dist)
+	lastBest := 2 * best_d
 	best_p := perm
 
 	start := time.Now()
@@ -62,7 +65,22 @@ func metropolisSearch(perm []int, dist [][]float64, niters int) ([]int, float64)
 
 		// report progress
 		if iter%period == 0 {
-			fmt.Printf("%6d: temperature %v, acceptance %d best dist %v\n", iter, temperature, acceptance, best_d)
+			fmt.Printf("%6d: temperature %v, acceptance %v best dist %v\n",
+				iter,
+				temperature,
+				float64(acceptance)/float64(period),
+				best_d)
+			// check countdown
+			if best_d == lastBest {
+				ct++
+			} else {
+				lastBest = best_d
+				ct = 0
+			}
+			if ct >= iterLimit {
+				break
+			}
+			// otherwise proceed to cooler temperature
 			temperature *= cooling
 			acceptance = 0
 		}

@@ -26,11 +26,15 @@ func main() {
 
 	niters := int(1e08)
 
+	// VARIOUS TESTS
 	//checkDeltaComp(perm, dist, niters, float64(1e-10))
 	//timeTravelComp(perm, dist, niters)
 	//timeDeltaComp(perm, dist, niters)
 
+	// NAIVE SEARCH
 	//perm, _ = naiveSearch(perm, dist, niters)
+
+	// METROPOLIS SEARCH
 	perm, _ = metropolisSearch(perm, dist, niters)
 
 	printRoute(perm, labels)
