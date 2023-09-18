@@ -1,10 +1,22 @@
+# Call with
+# Rscript drawRoute.R cityfile routefile outfile
+# e.g.
+# Rscript drawRoute.R gb_cities.csv route.txt img/map.pdf
+
 library(readr)
 library(dplyr)
 library(ggplot2)
 library(maps)
 
-cityfile <- "gb_cities.csv"
-routefile <- "route.txt"
+args <- commandArgs(trailingOnly=T)
+
+if(length(args) < 3){
+  cat("Usage: Rscript drawRoute.R cityfile routefile outfile\n")
+  quit(status=1)
+}
+cityfile <- args[1]
+routefile <- args[2]
+outfile <- args[3]
 
 cities <- read_csv(cityfile, show_col_types = FALSE)
 route <- read_csv(routefile, show_col_types = FALSE) %>%
@@ -22,6 +34,7 @@ cities['toLong'] <- toLong
 
 # draw cities
 worldmap <- map_data('world')
+pdf(outfile)
 ggplot() + 
   geom_polygon(data = worldmap, 
                aes(x = long, y = lat, 
@@ -46,6 +59,6 @@ ggplot() +
             size = 2,
             nudge_x = 0.3,
             check_overlap = TRUE)
-
+dev.off()
   
 
